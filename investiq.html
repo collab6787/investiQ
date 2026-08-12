@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INVESTIQ — Connect the Evidence. Reveal the Story.</title>
+  <link rel="stylesheet" href="./src/investiq.css" />
+  <!-- Charts and Network via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="#06b6d4" stroke-width="1" opacity="0.12" />
+            <g stroke="#06b6d4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 12l2-2 2 2 4-4" />
+              <circle cx="8" cy="16" r="1.2" fill="#06b6d4" />
+              <circle cx="16" cy="8" r="1.2" fill="#06b6d4" />
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="product">INVESTIQ</div>
+          <div class="subtitle">Digital Investigation Platform</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li class="nav-item selected">▣ Investigation Overview</li>
+          <li class="nav-item">◷ Timeline</li>
+          <li class="nav-item">▤ Evidence</li>
+          <li class="nav-item">◎ Evidence Fusion</li>
+          <li class="nav-item">◉ Relationship Graph</li>
+          <li class="nav-item">⚠ Suspicious Activity</li>
+          <li class="nav-item">⌁ Attack Path</li>
+          <li class="nav-item">✉ Message Threats</li>
+          <li class="nav-item">🤖 InvestIQ Copilot</li>
+          <li class="nav-item">▶ Investigation Replay</li>
+          <li class="nav-item">▥ Executive Brief</li>
+        </ul>
+      </nav>
+
+      <div class="side-stats">
+        <div class="stat"><span class="num">EVIDENCE</span><span class="val">15</span></div>
+        <div class="stat"><span class="num">CRITICAL</span><span class="val warn">5</span></div>
+        <div class="stat"><span class="num">SUSP LINKS</span><span class="val">8</span></div>
+        <div class="stat"><span class="num">ACTORS</span><span class="val">2</span></div>
+      </div>
+
+      <div class="side-footer">
+        <div class="status"><span class="dot active"></span> INVESTIGATION ACTIVE</div>
+        <div class="last">LAST ANALYSIS: Just now</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="top-left">
+          <h2>CASE: <span class="case">MV ARTEMIS GPS MANIPULATION</span></h2>
+        </div>
+        <div class="top-right">
+          <div class="top-metrics">
+            <div class="metric">THREAT LEVEL <strong class="high">HIGH</strong></div>
+            <div class="metric">MESSAGE THREATS <strong>7</strong></div>
+            <div class="metric">HIGHEST PRIORITY <strong>99%</strong></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="dashboard-grid">
+        <div class="panel timeline-panel">
+          <div class="panel-header">
+            <h3>INVESTIGATION TIMELINE</h3>
+            <div class="panel-actions"><button id="replayBtn">Play Replay</button></div>
+          </div>
+          <div id="timeline" class="timeline-list"></div>
+        </div>
+
+        <div class="panel right-column">
+          <div class="panel small evidence-fusion">
+            <h4>EVIDENCE FUSION</h4>
+            <div class="fusion-body">
+              <div class="fusion-visual">EMAIL → CHAT → SERVER LOG → GPS → TRANSACTION → ACTOR</div>
+              <div class="fusion-meta">6 related clues detected</div>
+              <button class="btn primary" id="viewConnections">VIEW CONNECTIONS</button>
+            </div>
+          </div>
+
+          <div class="panel small suspicious-activity">
+            <h4>SUSPICIOUS ACTIVITY</h4>
+            <div class="susp-grid">
+              <div class="susp-item"><div class="label">ODD HOURS</div><div class="count">8</div></div>
+              <div class="susp-item"><div class="label">GPS ANOMALIES</div><div class="count">5</div></div>
+              <div class="susp-item"><div class="label">SUSP TRANSFERS</div><div class="count">3</div></div>
+              <div class="susp-item"><div class="label">AUTH ANOMALIES</div><div class="count">4</div></div>
+              <div class="susp-item"><div class="label">SUSP MESSAGES</div><div class="count">7</div></div>
+              <div class="susp-item"><div class="label">LOC MISMATCH</div><div class="count">3</div></div>
+            </div>
+          </div>
+
+          <div class="panel small message-threats">
+            <h4>RECENT MESSAGE THREATS</h4>
+            <div class="msg-list" id="msgList"></div>
+            <button class="btn" id="viewAllMsgs">View All</button>
+          </div>
+        </div>
+
+        <div class="panel evidence-board">
+          <div class="panel-header"><h3>EVIDENCE BOARD</h3><div class="panel-actions"><button class="btn">PIN ALL</button></div></div>
+          <div id="evidenceBoard" class="evidence-grid"></div>
+        </div>
+
+        <div class="panel network-panel">
+          <div class="panel-header"><h3>RELATIONSHIP GRAPH</h3></div>
+          <div id="network" class="network-visual"></div>
+        </div>
+
+        <div class="panel attack-path">
+          <h3>ATTACK PATH</h3>
+          <ol class="attack-stages" id="attackPath"></ol>
+        </div>
+
+        <div class="panel copilot-panel">
+          <h3>INVESTIQ COPILOT — Your AI Investigation Partner</h3>
+          <div class="copilot-actions">
+            <button class="btn primary" id="askCopilot">ASK</button>
+            <button class="btn" id="summarizeCase">GENERATE SUMMARY</button>
+          </div>
+          <div id="copilotResp" class="copilot-response"></div>
+        </div>
+
+        <div class="panel case-brief">
+          <h3>AI CASE BRIEF</h3>
+          <div class="brief-sections">
+            <div><strong>WHAT HAPPENED</strong><p id="briefWhat">Potential GNSS manipulation linked to firmware injection and financial transfers.</p></div>
+            <div><strong>WHO IS INVOLVED</strong><p id="briefWho">CIPHER, SEAGULL — remote operator & on-site collaborator</p></div>
+            <div><strong>RECOMMENDED NEXT STEPS</strong><p id="briefNext">Investigate server logs and cross-check timestamps.</p></div>
+            <button class="btn" id="generateBrief">GENERATE WITH COPILOT</button>
+          </div>
+        </div>
+
+      </section>
+
+      <footer class="statusbar">
+        <div>15 EVIDENCE ITEMS • 5 CRITICAL EVENTS • 8 SUSPICIOUS LINKS • 2 PRIMARY ACTORS • 7 MESSAGE THREATS</div>
+        <div>99% HIGHEST PRIORITY • INVESTIGATION STATUS: <strong>ACTIVE</strong></div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Modal for event details -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="./src/investiq.js"></script>
+</body>
+</html>

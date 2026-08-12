@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Investigation Dashboard - Frontend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React + ReactDOM (development) via CDN and Babel for JSX-in-browser (fine for prototype/demo) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function Header() {
+        return (
+          <header className="header">
+            <h1>AI-Assisted Investigation Dashboard (Prototype)</h1>
+            <p className="subtitle">Timeline • Evidence Board • Relationship Graph • AI Summaries</p>
+          </header>
+        );
+      }
+
+      function EvidencePreview({ item }) {
+        return (
+          <div className="evidence-card">
+            <strong>{item.type}</strong>
+            <div className="evidence-body">{item.content}</div>
+            <div className="meta">{item.timestamp}</div>
+          </div>
+        );
+      }
+
+      function App() {
+        const [count, setCount] = useState(0);
+        const [evidence] = useState([
+          { type: 'Screenshot', content: 'Screenshot of suspicious transfer', timestamp: '2026-08-10 02:14' },
+          { type: 'Email', content: 'Payment confirmation to unknown account', timestamp: '2026-08-09 21:03' },
+          { type: 'GPS', content: 'Device ping near warehouse', timestamp: '2026-08-10 01:45' }
+        ]);
+n        useEffect(() => {
+          // placeholder for loading generated sample data or calling an API
+        }, []);
+n        return (
+          <div className="container">
+            <Header />
+            <main className="main-grid">
+              <section className="panel evidence">
+                <h2>Evidence Board</h2>
+                <div className="evidence-list">
+                  {evidence.map((e, i) => (
+                    <EvidencePreview key={i} item={e} />
+                  ))}
+                </div>
+              </section>
+
+              <section className="panel timeline">
+                <h2>Timeline (reconstructed)</h2>
+                <p>Auto-generated timeline will appear here.</p>
+                <button onClick={() => setCount(c => c + 1)}>Counter {count}</button>
+              </section>
+
+              <section className="panel summary">
+                <h2>AI Summary</h2>
+                <p>Short summary of the investigation so far (placeholder).</p>
+              </section>
+            </main>
+            <footer className="footer">Open <code>C:\\MLSA\\Project\\frontend\\index.html</code> in your browser to view this prototype.</footer>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

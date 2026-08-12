@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detective Board — StoryQuirk</title>
+  <link rel="stylesheet" href="./src/detective.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topnav">
+      <div class="brand-block">
+        <span class="brand-primary">STORY</span><span class="brand-accent">Quirk</span>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#">Home</a>
+        <a href="#">Crime Stories</a>
+        <a href="#">Suspense Stories</a>
+        <a href="#">About</a>
+        <a href="#">Contact Us</a>
+      </nav>
+      <button class="nav-search" aria-label="Search">⌕</button>
+    </header>
+
+    <main class="hero-stage">
+      <div class="hero-copy">
+        <h1>CRIME STORIES<br />MURDER MYSTERIES.<br /><span>SUSPENSE STORIES</span></h1>
+        <p>Live into the darkest corners of crime, mystery, and suspense. Discover stories designed to keep you on the edge of your seat.</p>
+        <div class="hero-actions">
+          <button class="cta primary" data-action="explore">Explore Stories</button>
+          <button class="cta secondary" data-action="visit">Visit Site</button>
+        </div>
+        <div class="case-status-panel" aria-live="polite">
+          <div class="status-pill">CASE • MV ARTEMIS</div>
+          <div class="status-grid">
+            <div><span>Priority</span><strong id="casePriority">98%</strong></div>
+            <div><span>Last sync</span><strong id="caseSync">just now</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="board-frame">
+        <div class="detective-board" id="corkboard">
+          <svg id="connections" class="connections" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div class="lamp" aria-hidden="true"></div>
+          <div class="rope-vignette"></div>
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="42" fill="rgba(0,0,0,0.25)" stroke="#d7a12b" stroke-width="4"/>
+              <path d="M50 16 L60 40 L85 42 L64 57 L72 82 L50 66 L28 82 L36 57 L15 42 L40 40 Z" fill="#d7a12b" opacity="0.9"/>
+            </svg>
+          </div>
+
+          <div class="pin pin-1" id="pin1" data-connect="pin2,pin4,pin6">
+            <div class="tack"></div>
+            <img src="assets/silhouette.jpg" alt="silhouette" />
+            <div class="note">EVIDENCE: Unknown operator</div>
+          </div>
+
+          <div class="pin pin-2" id="pin2" data-connect="pin1,pin3,pin6">
+            <div class="tack"></div>
+            <img src="assets/top-secret.jpg" alt="top secret" />
+            <div class="note">TOP SECRET FILE</div>
+          </div>
+
+          <div class="pin pin-3" id="pin3" data-connect="pin2,pin5,pin7">
+            <div class="tack"></div>
+            <img src="assets/photographer.jpg" alt="photographer" />
+            <div class="note">PHOTO: Device trace</div>
+          </div>
+
+          <div class="pin pin-4" id="pin4" data-connect="pin1,pin6">
+            <div class="tack"></div>
+            <div class="paper">
+              <div class="paper-title">Server Log</div>
+              <div class="paper-body">Firmware upload from remote IP 198.51.100.14</div>
+            </div>
+          </div>
+
+          <div class="pin pin-5" id="pin5" data-connect="pin3,pin7">
+            <div class="tack"></div>
+            <img src="assets/fingerprint.jpg" alt="fingerprint" />
+            <div class="note">FORENSIC PRINT</div>
+          </div>
+
+          <div class="pin pin-6" id="pin6" data-connect="pin1,pin2,pin4,pin7">
+            <div class="tack"></div>
+            <img src="assets/casefile.png" alt="case file" />
+            <div class="note">CASE FILE: MV ARTEMIS</div>
+          </div>
+
+          <div class="pin pin-7" id="pin7" data-connect="pin3,pin5,pin6">
+            <div class="tack"></div>
+            <img src="assets/clue-map.jpg" alt="clue map" />
+            <div class="note">CLUE MAP</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-tools" aria-label="board tools">
+        <button class="tool-btn arrow" data-action="forward" aria-label="Move forward">↗</button>
+        <button class="tool-btn loop" data-action="scan" aria-label="Scan board">◍</button>
+      </div>
+    </main>
+  </div>
+
+  <div id="evidenceModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalInner"></div>
+    </div>
+  </div>
+
+  <script src="./src/detective.js"></script>
+</body>
+</html>
